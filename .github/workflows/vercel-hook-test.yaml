@@ -24,5 +24,6 @@ jobs:
             const contentStr = await readFile(filePath, { encoding: "utf8" });
             const contentJson = JSON.parse(contentStr);
             console.log(JSON.stringify(context));
+            console.log(JSON.stringify(github));
             console.log(JSON.stringify(contentJson.version));
             return { version: contentJson.version };
