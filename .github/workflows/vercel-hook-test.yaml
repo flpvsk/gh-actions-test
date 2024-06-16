@@ -11,7 +11,7 @@ jobs:
       - name: Checkout code
         uses: "actions/checkout@v4"
         with:
-          ref: ${{ github.event.deployment.ref }}
+          ref: main
 
       - name: "Github Script Action Test"
         id: gh-script-action-test
