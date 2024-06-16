@@ -1,0 +1,24 @@
+on:
+  deployment_status
+
+jobs:
+  vercel-hook-test:
+    name: Vercel hook test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        ref: ${{ github.event.deployment_status.ref }}
+
+      - name: "Github Script Action Test"
+        id: gh-script-action-test
+        uses: "actions/github-script@v7"
+        script: |
+          const fs = require("node:fs/promises");
+          const { resolve } = require("node:path");
+          const filePath = resolve("./legacy/package.json");
+          const contentStr = await readFile(filePath, { encoding: "utf8" });
+          const contentJson = JSON.parse(contentStr);
+          console.log(JSON.stringify(context));
+          return { version: contentJson.version };
