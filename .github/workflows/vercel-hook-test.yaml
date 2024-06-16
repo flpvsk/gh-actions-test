@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: "actions/checkout@v3"
+        uses: "actions/checkout@v4"
         with:
           ref: ${{ github.event.deployment_status.ref }}
 
@@ -18,7 +18,7 @@ jobs:
         uses: "actions/github-script@v7"
         with:
           script: |
-            const fs = require("node:fs/promises");
+            const { readFile } = require("node:fs/promises");
             const { resolve } = require("node:path");
             const filePath = resolve("./legacy/package.json");
             const contentStr = await readFile(filePath, { encoding: "utf8" });
